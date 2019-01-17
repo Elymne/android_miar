@@ -8,14 +8,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import nantes.iut.org.android_miar.adapters.PicineArrayAdapter;
-import nantes.iut.org.android_miar.download.DownloadPicine;
-import nantes.iut.org.android_miar.entities.Picine;
+import nantes.iut.org.android_miar.adapters.PiscineArrayAdapter;
+import nantes.iut.org.android_miar.download.DownloadPiscine;
+import nantes.iut.org.android_miar.entities.Piscine;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Picine> listePicines = new ArrayList<>();
-    ArrayAdapter<Picine> arrayAdapterPicine;
+    List<Piscine> listePiscines = new ArrayList<>();
+    ArrayAdapter<Piscine> arrayAdapterPicine;
     ListView listeViewPicine;
 
     @Override
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listeViewPicine = (ListView) findViewById(R.id.listViewPicine);
-        arrayAdapterPicine = new PicineArrayAdapter(this, R.layout.item_picine,listePicines);
+        arrayAdapterPicine = new PiscineArrayAdapter(this, R.layout.item_piscine, listePiscines);
 
         listeViewPicine.setAdapter(arrayAdapterPicine);
     }
@@ -31,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        new DownloadPicine(this).execute();
+        new DownloadPiscine(this).execute();
     }
 
-    public void populate(ArrayList<Picine> listePicines){
+    public void populate(ArrayList<Piscine> listePiscines){
         this.arrayAdapterPicine.clear();
-        this.arrayAdapterPicine.addAll(listePicines);
+        this.arrayAdapterPicine.addAll(listePiscines);
         this.arrayAdapterPicine.notifyDataSetChanged();
     }
 }

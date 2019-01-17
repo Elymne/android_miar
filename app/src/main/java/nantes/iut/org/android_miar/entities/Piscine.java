@@ -2,7 +2,7 @@ package nantes.iut.org.android_miar.entities;
 
 import java.util.List;
 
-public class Picine {
+public class Piscine {
 
     private String recordid;
     private String bassin_loisir;
@@ -22,12 +22,12 @@ public class Picine {
     private String cp;
     private List<Horaire> horaires;
 
-    public Picine(String recordid, String bassin_loisir, String commune,
-                  String tel, String info_complementaires, String nom_usuel,
-                  String libre_service, String adresse, String solarium,
-                  String bassin_sportif, String web, String plongeoir,
-                  String toboggan, String pataugeoire, String accessibilite_handicap,
-                  String cp) {
+    public Piscine(String recordid, String bassin_loisir, String commune,
+                   String tel, String info_complementaires, String nom_usuel,
+                   String libre_service, String adresse, String solarium,
+                   String bassin_sportif, String web, String plongeoir,
+                   String toboggan, String pataugeoire, String accessibilite_handicap,
+                   String cp) {
         this.recordid = recordid;
         this.bassin_loisir = bassin_loisir;
         this.commune = commune;

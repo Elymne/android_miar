@@ -18,16 +18,16 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import nantes.iut.org.android_miar.MainActivity;
-import nantes.iut.org.android_miar.entities.Picine;
+import nantes.iut.org.android_miar.entities.Piscine;
 
-public class DownloadPicine extends AsyncTask<String, Void, ArrayList<Picine>> {
+public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>> {
 
     private static String BASE_URL = "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_piscines-nantes-metropole&facet=commune&facet=acces_pmr_equipt&facet=bassin_sportif&facet=pataugeoire&facet=toboggan&facet=bassin_apprentissage&facet=plongeoir&facet=solarium&facet=bassin_loisir&facet=accessibilite_handicap&facet=libre_service";
     private HttpURLConnection httpClient;
     private ProgressDialog progress;
     private volatile MainActivity mainActivity;
 
-    public DownloadPicine(MainActivity mainActivity) {
+    public DownloadPiscine(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         this.progress = new ProgressDialog(this.mainActivity);
     }
@@ -41,9 +41,9 @@ public class DownloadPicine extends AsyncTask<String, Void, ArrayList<Picine>> {
     }
 
     @Override
-    protected ArrayList<Picine> doInBackground(String... values) {
+    protected ArrayList<Piscine> doInBackground(String... values) {
 
-        ArrayList<Picine> result = new ArrayList<>();
+        ArrayList<Piscine> result = new ArrayList<>();
         String stream = null;
 
         try {
@@ -61,7 +61,7 @@ public class DownloadPicine extends AsyncTask<String, Void, ArrayList<Picine>> {
             JSONArray jsonArrayRecords = new JSONObject(stream).getJSONArray("records");
             for(int i = 0; i < jsonArrayRecords.length(); i++){
                 JSONObject jsonObjectRecords = jsonArrayRecords.getJSONObject(i);
-                result.add(new Picine(
+                result.add(new Piscine(
                         jsonObjectRecords.getString("recordid"),
                         hasValue("bassin_loisir", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("commune", jsonObjectRecords.getJSONObject("fields")),
@@ -101,7 +101,7 @@ public class DownloadPicine extends AsyncTask<String, Void, ArrayList<Picine>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Picine> result){
+    protected void onPostExecute(ArrayList<Piscine> result){
         if(progress.isShowing())
             progress.dismiss();
         this.mainActivity.populate(result);

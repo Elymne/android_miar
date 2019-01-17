@@ -11,19 +11,19 @@ import android.widget.TextView;
 import java.util.List;
 
 import nantes.iut.org.android_miar.R;
-import nantes.iut.org.android_miar.entities.Picine;
+import nantes.iut.org.android_miar.entities.Piscine;
 
-public class PicineArrayAdapter extends ArrayAdapter<Picine> {
+public class PiscineArrayAdapter extends ArrayAdapter<Piscine> {
 
-    List<Picine> listePicine;
+    List<Piscine> listePiscine;
     Context context;
     int ressource;
 
-    public PicineArrayAdapter(Context context, int ressource, List<Picine> listePicine) {
-        super(context, ressource, android.R.id.text1, listePicine);
+    public PiscineArrayAdapter(Context context, int ressource, List<Piscine> listePiscine) {
+        super(context, ressource, android.R.id.text1, listePiscine);
         this.context = context;
         this.ressource = ressource;
-        this.listePicine = listePicine;
+        this.listePiscine = listePiscine;
     }
 
     @Override

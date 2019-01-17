@@ -30,7 +30,7 @@
             android:id="@+id/textViewMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Liste des picines"
+            android:text="@string/text_menu"
             android:textAppearance="@android:style/TextAppearance.Widget.PopupMenu.Large" />
 
         <ListView
