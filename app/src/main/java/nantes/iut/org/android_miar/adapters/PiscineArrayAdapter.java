@@ -30,26 +30,21 @@ public class PiscineArrayAdapter extends ArrayAdapter<Piscine> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View view = inflater.inflate(ressource, parent, false);
-        TextView textNom = (TextView) view.findViewById(R.id.textViewNom);
-        TextView textAdresse = (TextView) view.findViewById(R.id.textViewAdresse);
-        TextView textBassinSportif = (TextView) view.findViewById(R.id.textViewBassinSportif);
-        TextView textToboggan = (TextView) view.findViewById(R.id.textViewToboggan);
-        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+        TextView textNom = view.findViewById(R.id.textViewNom);
+        TextView textAdresse = view.findViewById(R.id.textViewAdresse);
+
+        TextView textBassinSportif = view.findViewById(R.id.textViewBassinSportif);
+        TextView textToboggan = view.findViewById(R.id.textViewToboggan);
+        TextView textBassinLoisir = view.findViewById(R.id.textViewBassinLoisir);
+        TextView textAccesHandicap = view.findViewById(R.id.textViewAccesHadicap);
 
         textNom.setText(getItem(position).getNom_usuel());
         textAdresse.setText(getItem(position).getAdresse());
-        if(getItem(position).isBassin_sportif()){
-            textBassinSportif.setText("OUI");
-        }else{
-            textBassinSportif.setText("NON");
-        }
-        if(getItem(position).isToboggan()){
-            textToboggan.setText("OUI");
-        }else{
-            textToboggan.setText("NON");
-        }
+        textBassinLoisir.setText(getItem(position).getBassin_loisir());
+        textBassinSportif.setText(getItem(position).getBassin_sportif());
+        textToboggan.setText(getItem(position).getToboggan());
+        textAccesHandicap.setText(getItem(position).getAccessibilite_handicap());
 
-        ratingBar.setNumStars(5);
         return view;
     }
 
