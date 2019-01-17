@@ -1,8 +1,20 @@
 package nantes.iut.org.android_miar.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 
-public class Piscine {
+public class Piscine implements Parcelable {
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Piscine createFromParcel(Parcel in) {
+            return new Piscine(in);
+        }
+
+        public Piscine[] newArray(int size) {
+            return new Piscine[size];
+        }
+    };
 
     private String recordid;
     private String bassin_loisir;
@@ -110,5 +122,36 @@ public class Piscine {
 
     public String getCp() {
         return cp;
+    }
+
+    // Parcelling part
+    public Piscine(Parcel in){
+        this.recordid = in.readString();
+        this.bassin_loisir = in.readString();
+        this.commune = in.readString();
+        this.tel = in.readString();
+        this.info_complementaires = in.readString();
+        this.nom_usuel = in.readString();
+        this.nom_complet = in.readString();
+        this.libre_service = in.readString();
+        this.adresse = in.readString();
+        this.solarium = in.readString();
+        this.bassin_sportif = in.readString();
+        this.web = in.readString();
+        this.plongeoir = in.readString();
+        this.toboggan = in.readString();
+        this.pataugeoire = in.readString();
+        this.accessibilite_handicap = in.readString();
+        this.cp = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

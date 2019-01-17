@@ -1,7 +1,10 @@
 package nantes.iut.org.android_miar.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -27,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapterPicine = new PiscineArrayAdapter(this, R.layout.item_piscine, listePiscines);
 
         listeViewPicine.setAdapter(arrayAdapterPicine);
+
+
+        // listener on piscine item
+        listeViewPicine.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent request = new Intent(MainActivity.this, PiscineDetailsActivity.class);
+                Piscine piscine = (Piscine) parent.getItemAtPosition(position);
+                // passing item - Piscine object in extras
+                request.putExtra("piscine", piscine);
+                startActivityForResult(request, 200);
+            }
+        });
     }
 
     @Override
@@ -40,4 +55,8 @@ public class MainActivity extends AppCompatActivity {
         this.arrayAdapterPicine.addAll(listePiscines);
         this.arrayAdapterPicine.notifyDataSetChanged();
     }
+
+    // on result - update stars evaluation in list
+    // @Override
+    // protected void onActivityResult(int reqCode, int resCode, Intent result){}
 }
