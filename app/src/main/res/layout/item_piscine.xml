@@ -68,6 +68,29 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textViewBassinLoisirStatic"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Bassin Loisir"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <TextView
+                android:id="@+id/textViewBassinLoisir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
                 android:id="@+id/textViewBassinSportifStatic"
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -91,29 +114,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewTobogganStatic"
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Toboggan "
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <TextView
-                android:id="@+id/textViewToboggan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
                 android:id="@+id/textViewAccesHandicapStatic"
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -124,29 +124,6 @@
 
             <TextView
                 android:id="@+id/textViewAccesHadicap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewBassinLoisirStatic"
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Bassin Loisir"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-            <TextView
-                android:id="@+id/textViewBassinLoisir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

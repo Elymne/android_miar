@@ -1,5 +1,7 @@
 package nantes.iut.org.android_miar.entities;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Piscine {
@@ -48,11 +50,24 @@ public class Piscine {
         this.cp = cp;
     }
 
-    public Horaire getHoraireToday(){
+    public List<Horaire> getHoraireOfTheDay(){
+        Calendar c = Calendar.getInstance();
+        List<Horaire> result = new ArrayList<>();
         for(Horaire unHoraire : this.horaires){
-
+            if(unHoraire.getJourInt() == c.get(Calendar.DAY_OF_WEEK))
+                result.add(unHoraire);
         }
-        return null;
+        return result;
+    }
+
+    public boolean isOpen(){
+        boolean result = false;
+        for(Horaire unHoraire : horaires){
+            for(Horaire unHoraireFrom : getHoraireOfTheDay()){
+
+            }
+        }
+        return result;
     }
 
     public String getRecordid() {

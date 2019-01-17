@@ -15,9 +15,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 
-import nantes.iut.org.android_miar.MainActivity;
+import nantes.iut.org.android_miar.activities.MainActivity;
 import nantes.iut.org.android_miar.entities.Horaire;
 import nantes.iut.org.android_miar.entities.Piscine;
 
@@ -85,6 +86,7 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
                         hasValue("tel", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("infos_complementaires", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("nom_usuel", jsonObjectRecords.getJSONObject("fields")),
+                        hasValue("nom_complet", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("libre_service", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("adresse", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("solarium", jsonObjectRecords.getJSONObject("fields")),
@@ -144,6 +146,8 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         } finally {
             this.httpClient.disconnect();
         }
@@ -163,6 +167,6 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
     protected void onPostExecute(ArrayList<Piscine> result){
         if(progress.isShowing())
             progress.dismiss();
-        this.mainActivity.populatePiscine(result);
+        this.mainActivity.populate(result);
     }
 }
