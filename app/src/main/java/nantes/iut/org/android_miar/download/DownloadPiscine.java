@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import nantes.iut.org.android_miar.MainActivity;
+import nantes.iut.org.android_miar.activities.MainActivity;
 import nantes.iut.org.android_miar.entities.Piscine;
 
 public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>> {
@@ -68,6 +68,7 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
                         hasValue("tel", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("infos_complementaires", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("nom_usuel", jsonObjectRecords.getJSONObject("fields")),
+                        hasValue("nom_complet", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("libre_service", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("adresse", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("solarium", jsonObjectRecords.getJSONObject("fields")),
