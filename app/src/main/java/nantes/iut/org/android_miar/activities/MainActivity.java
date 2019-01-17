@@ -1,4 +1,4 @@
-package nantes.iut.org.android_miar;
+package nantes.iut.org.android_miar.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nantes.iut.org.android_miar.R;
 import nantes.iut.org.android_miar.adapters.PiscineArrayAdapter;
 import nantes.iut.org.android_miar.download.DownloadPiscine;
 import nantes.iut.org.android_miar.entities.Piscine;

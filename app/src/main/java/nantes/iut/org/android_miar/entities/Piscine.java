@@ -10,6 +10,7 @@ public class Piscine {
     private String tel;
     private String info_complementaires;
     private String nom_usuel;
+    private String nom_complet;
     private String libre_service;
     private String adresse;
     private String solarium;
@@ -23,7 +24,7 @@ public class Piscine {
     private List<Horaire> horaires;
 
     public Piscine(String recordid, String bassin_loisir, String commune,
-                   String tel, String info_complementaires, String nom_usuel,
+                   String tel, String info_complementaires, String nom_usuel, String nom_complet,
                    String libre_service, String adresse, String solarium,
                    String bassin_sportif, String web, String plongeoir,
                    String toboggan, String pataugeoire, String accessibilite_handicap,
@@ -34,6 +35,7 @@ public class Piscine {
         this.tel = tel;
         this.info_complementaires = info_complementaires;
         this.nom_usuel = nom_usuel;
+        this.nom_complet = nom_complet;
         this.libre_service = libre_service;
         this.adresse = adresse;
         this.solarium = solarium;
