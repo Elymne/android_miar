@@ -51,10 +51,7 @@ public class Piscine {
     }
 
     public boolean isBassin_loisir() {
-        boolean result = false;
-        if(bassin_loisir == "OUI")
-            result = true;
-        return result;
+        return bassin_loisir == "OUI";
     }
 
     public String getCommune() {
@@ -74,10 +71,7 @@ public class Piscine {
     }
 
     public boolean isLibre_service() {
-        boolean result = false;
-        if(libre_service == "OUI")
-            result = true;
-        return result;
+        return libre_service == "OUI";
     }
 
     public String getAdresse() {
@@ -85,17 +79,11 @@ public class Piscine {
     }
 
     public boolean isSolarium() {
-        boolean result = false;
-        if(solarium == "OUI")
-            result = true;
-        return result;
+        return solarium == "OUI";
     }
 
     public boolean isBassin_sportif() {
-        boolean result = false;
-        if(bassin_sportif == "OUI")
-            result = true;
-        return result;
+        return bassin_sportif == "OUI";
     }
 
     public String getWeb() {
@@ -103,31 +91,19 @@ public class Piscine {
     }
 
     public boolean isPlongeoir() {
-        boolean result = false;
-        if(plongeoir == "OUI")
-            result = true;
-        return result;
+        return plongeoir == "OUI";
     }
 
     public boolean isToboggan() {
-        boolean result = false;
-        if(toboggan == "OUI")
-            result = true;
-        return result;
+        return toboggan == "OUI";
     }
 
     public boolean isPataugeoire() {
-        boolean result = false;
-        if(pataugeoire == "OUI")
-            result = true;
-        return result;
+        return pataugeoire == "OUI";
     }
 
     public boolean isAccessibilite_handicap() {
-        boolean result = false;
-        if(accessibilite_handicap == "OUI")
-            result = true;
-        return result;
+        return accessibilite_handicap == "OUI";
     }
 
     public String getCp() {
