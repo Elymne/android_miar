@@ -46,6 +46,13 @@ public class Piscine {
         this.cp = cp;
     }
 
+    public Horaire getHoraireToday(){
+        for(Horaire unHoraire : this.horaires){
+
+        }
+        return null;
+    }
+
     public String getRecordid() {
         return recordid;
     }
