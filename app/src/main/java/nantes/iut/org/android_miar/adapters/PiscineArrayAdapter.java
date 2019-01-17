@@ -42,7 +42,6 @@ public class PiscineArrayAdapter extends ArrayAdapter<Piscine> {
         textAdresse.setText(getItem(position).getAdresse());
         textBassinLoisir.setText(getItem(position).getBassin_loisir());
         textBassinSportif.setText(getItem(position).getBassin_sportif());
-        textToboggan.setText(getItem(position).getToboggan());
         textAccesHandicap.setText(getItem(position).getAccessibilite_handicap());
 
         return view;

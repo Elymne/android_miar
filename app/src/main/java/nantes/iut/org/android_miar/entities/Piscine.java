@@ -1,5 +1,10 @@
 package nantes.iut.org.android_miar.entities;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -50,21 +55,25 @@ public class Piscine {
         this.cp = cp;
     }
 
-    public List<Horaire> getHoraireOfTheDay(){
-        Calendar c = Calendar.getInstance();
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public List<Horaire> getHoraireOfTheDay() {
+        LocalDate localDate = LocalDate.now();
         List<Horaire> result = new ArrayList<>();
-        for(Horaire unHoraire : this.horaires){
-            if(unHoraire.getJourInt() == c.get(Calendar.DAY_OF_WEEK))
+        for (Horaire unHoraire : this.horaires) {
+            if (unHoraire.getJourInt() == localDate.getDayOfWeek().getValue())
                 result.add(unHoraire);
         }
         return result;
     }
 
-    public boolean isOpen(){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean isOpen() {
+        LocalTime localTime = LocalTime.now();
         boolean result = false;
-        for(Horaire unHoraire : horaires){
-            for(Horaire unHoraireFrom : getHoraireOfTheDay()){
-
+        for (Horaire unHoraire : horaires) {
+            for (Horaire unHoraireFrom : getHoraireOfTheDay()) {
+                if(localTime.isAfter(unHoraire.getHeure_debut()) && localTime.isBefore(unHoraire.getHeure_fin()))
+                    result = true;
             }
         }
         return result;
@@ -170,7 +179,7 @@ public class Piscine {
         return horaires;
     }
 
-    public void addHoraire(Horaire horaire){
+    public void addHoraire(Horaire horaire) {
         this.horaires.add(horaire);
     }
 }

@@ -20,11 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textViewTitre"
+        <ImageView
+            android:id="@+id/imageViewTitre"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:text="Ceci est un titre mais sera très vite remplacé par une image un peu plus stylé quand même" />
+            android:layout_height="50dp"
+            android:src="@drawable/titre"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/textViewMenu"
