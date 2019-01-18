@@ -124,6 +124,46 @@ public class Piscine implements Parcelable {
         return cp;
     }
 
+    public String getBassin_loisir() {
+        return bassin_loisir;
+    }
+
+    public String getLibre_service() {
+        return libre_service;
+    }
+
+    public String getSolarium() {
+        return solarium;
+    }
+
+    public String getBassin_sportif() {
+        return bassin_sportif;
+    }
+
+    public String getPlongeoir() {
+        return plongeoir;
+    }
+
+    public String getToboggan() {
+        return toboggan;
+    }
+
+    public String getPataugeoire() {
+        return pataugeoire;
+    }
+
+    public String getAccessibilite_handicap() {
+        return accessibilite_handicap;
+    }
+
+    public List<Horaire> getHoraires() {
+        return horaires;
+    }
+
+    public void addHoraire(Horaire horaire){
+        this.horaires.add(horaire);
+    }
+
     // Parcelling part
     public Piscine(Parcel in){
         this.recordid = in.readString();

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         new DownloadPiscine(this).execute();
     }
 
-    public void populate(ArrayList<Piscine> listePiscines){
+    public void populatePiscine(ArrayList<Piscine> listePiscines){
         this.arrayAdapterPicine.clear();
         this.arrayAdapterPicine.addAll(listePiscines);
         this.arrayAdapterPicine.notifyDataSetChanged();
