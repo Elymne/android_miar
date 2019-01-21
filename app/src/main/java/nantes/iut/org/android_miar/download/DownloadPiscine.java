@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import nantes.iut.org.android_miar.activities.MainActivity;
@@ -25,7 +24,7 @@ import nantes.iut.org.android_miar.entities.Piscine;
 public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>> {
 
     private static String BASE_URL_PISCINE = "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_piscines-nantes-metropole&facet=commune&facet=acces_pmr_equipt&facet=bassin_sportif&facet=pataugeoire&facet=toboggan&facet=bassin_apprentissage&facet=plongeoir&facet=solarium&facet=bassin_loisir&facet=accessibilite_handicap&facet=libre_service";
-    private static String BASE_URL_HORAIRE = "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_piscines-nantes-metropole-horaires&facet=nom_periode&facet=jour&facet=type_horaire";
+    private static String BASE_URL_HORAIRE = "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_piscines-nantes-metropole-horaires&rows=200&facet=nom_periode&facet=jour&facet=type_horaire";
     private HttpURLConnection httpClient;
     private ProgressDialog progress;
     private volatile MainActivity mainActivity;
@@ -46,17 +45,17 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
     @Override
     protected ArrayList<Piscine> doInBackground(String... values) {
 
-        ArrayList<Piscine> result = this.getPiscineList();
+        ArrayList<Piscine> piscineList = this.getPiscineList();
         ArrayList<Horaire> horaireList = this.getHoraireList();
 
-        for(Piscine unePiscine : result){
+        for(Piscine unePiscine : piscineList){
             for(Horaire unHoraire : horaireList){
-                if(unePiscine.getRecordid().equals(unHoraire.getRecordid()))
+                if(unePiscine.getRecordid()==(unHoraire.getRecordid()))
                     unePiscine.addHoraire(unHoraire);
             }
         }
 
-        return result;
+        return piscineList;
     }
 
     private ArrayList<Piscine> getPiscineList(){
@@ -80,7 +79,7 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
             for(int i = 0; i < jsonArrayRecords.length(); i++){
                 JSONObject jsonObjectRecords = jsonArrayRecords.getJSONObject(i);
                 result.add(new Piscine(
-                        jsonObjectRecords.getString("recordid"),
+                        hasValue("idobj", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("bassin_loisir", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("commune", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("tel", jsonObjectRecords.getJSONObject("fields")),
@@ -105,8 +104,6 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        } finally {
-            this.httpClient.disconnect();
         }
         return result;
     }
@@ -132,12 +129,12 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
             for(int i = 0; i < jsonArrayRecords.length(); i++){
                 JSONObject jsonObjectRecords = jsonArrayRecords.getJSONObject(i);
                 result.add(new Horaire(
-                        jsonObjectRecords.getString("recordid"),
+                        hasValue("idobj", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("jour", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("heure_debut", jsonObjectRecords.getJSONObject("fields")),
                         hasValue("heure_fin", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("heure_debut", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("heure_fin", jsonObjectRecords.getJSONObject("fields"))
+                        hasValue("date_debut", jsonObjectRecords.getJSONObject("fields")),
+                        hasValue("date_fin", jsonObjectRecords.getJSONObject("fields"))
                 ));
             }
         } catch (MalformedURLException e) {
@@ -145,8 +142,6 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         } finally {
             this.httpClient.disconnect();

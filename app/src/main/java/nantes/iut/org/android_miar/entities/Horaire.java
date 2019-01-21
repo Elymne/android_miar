@@ -1,32 +1,27 @@
 package nantes.iut.org.android_miar.entities;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
+import java.util.Calendar;
 
 public class Horaire {
 
     private String recordid;
     private String jour;
-    private LocalTime heure_debut;
-    private LocalTime heure_fin;
-    private LocalDate date_debut;
-    private LocalDate date_fin;
+    private Calendar heure_debut;
+    private Calendar heure_fin;
+    private Calendar date_debut;
+    private Calendar date_fin;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Horaire(String recordid, String jour, String heure_debut, String heure_fin, String date_debut, String date_fin) throws ParseException {
+    public Horaire(String recordid, String jour, String heure_debut, String heure_fin, String date_debut, String date_fin){
         this.recordid = recordid;
         this.jour = jour;
-        this.heure_debut = LocalTime.parse(heure_debut);
-        this.heure_fin = LocalTime.parse(heure_fin);
-        this.date_debut = LocalDate.parse(date_debut);
-        this.date_fin = LocalDate.parse(date_fin);
+        this.heure_debut = Calendar.getInstance();
+        this.heure_debut.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE, parseHour(heure_debut), parseMinute(heure_debut));
+        this.heure_fin = Calendar.getInstance();
+        this.heure_fin.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE, parseHour(heure_debut), parseMinute(heure_debut));
+        this.date_debut = Calendar.getInstance();
+        this.date_debut.set(parseYear(date_debut), parseMonth(date_debut), parseDay(date_debut));
+        this.date_fin = Calendar.getInstance();
+        this.date_fin.set(parseYear(date_fin), parseMonth(date_fin), parseDay(date_fin));
     }
 
     public String getRecordid() {
@@ -56,19 +51,64 @@ public class Horaire {
         return result;
     }
 
-    public LocalTime getHeure_debut() {
+    private Integer parseYear(String stringDate){
+        String timeParse[] = stringDate.split("-");
+        Integer result = 0;
+        if(stringDate != "PAS DE DONNEES")
+            result = Integer.valueOf(timeParse[0]);
+
+        return result;
+    }
+
+    private Integer parseMonth(String stringDate){
+        String timeParse[] = stringDate.split("-");
+        Integer result = 0;
+        if(stringDate != "PAS DE DONNEES")
+            result = Integer.valueOf(timeParse[0]);
+
+        return result;
+    }
+
+    private Integer parseDay(String stringDate){
+        String timeParse[] = stringDate.split("-");
+        Integer result = 0;
+        if(stringDate != "PAS DE DONNEES")
+            result = Integer.valueOf(timeParse[0]);
+
+        return result;
+    }
+
+    private Integer parseHour(String stringDate){
+        String timeParse[] = stringDate.split(":");
+        Integer result = 0;
+        if(stringDate != "PAS DE DONNEES")
+            result = Integer.valueOf(timeParse[0]);
+
+        return result;
+    }
+
+    private Integer parseMinute(String stringDate){
+        String timeParse[] = stringDate.split(":");
+        Integer result = 0;
+        if(stringDate != "PAS DE DONNEES")
+            result = Integer.valueOf(timeParse[0]);
+
+        return result;
+    }
+
+    public Calendar getHeure_debut() {
         return heure_debut;
     }
 
-    public LocalTime getHeure_fin() {
+    public Calendar getHeure_fin() {
         return heure_fin;
     }
 
-    public LocalDate getDate_debut() {
+    public Calendar getDate_debut() {
         return date_debut;
     }
 
-    public LocalDate getDate_fin() {
+    public Calendar getDate_fin() {
         return date_fin;
     }
 }

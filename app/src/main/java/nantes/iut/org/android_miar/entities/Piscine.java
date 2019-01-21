@@ -1,8 +1,5 @@
 package nantes.iut.org.android_miar.entities;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -55,25 +52,28 @@ public class Piscine {
         this.cp = cp;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public List<Horaire> getHoraireOfTheDay() {
-        LocalDate localDate = LocalDate.now();
-        List<Horaire> result = new ArrayList<>();
-        for (Horaire unHoraire : this.horaires) {
-            if (unHoraire.getJourInt() == localDate.getDayOfWeek().getValue())
-                result.add(unHoraire);
+        Calendar localDate = Calendar.getInstance();
+        List<Horaire> result = null;
+        if(this.horaires != null){
+            result = new ArrayList<>();
+            for (Horaire unHoraire : this.horaires) {
+                if (unHoraire.getJourInt() == localDate.getFirstDayOfWeek())
+                    result.add(unHoraire);
+            }
         }
         return result;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean isOpen() {
-        LocalTime localTime = LocalTime.now();
+        Calendar localDate = Calendar.getInstance();
         boolean result = false;
-        for (Horaire unHoraire : horaires) {
-            for (Horaire unHoraireFrom : getHoraireOfTheDay()) {
-                if(localTime.isAfter(unHoraire.getHeure_debut()) && localTime.isBefore(unHoraire.getHeure_fin()))
-                    result = true;
+        if(this.horaires != null){
+            for (Horaire unHoraire : this.horaires) {
+                for (Horaire unHoraireFrom : getHoraireOfTheDay()) {
+                    if(localDate.after(unHoraire.getHeure_debut()) && localDate.before(unHoraire.getHeure_fin()))
+                        result = true;
+                }
             }
         }
         return result;
@@ -177,6 +177,12 @@ public class Piscine {
 
     public List<Horaire> getHoraires() {
         return horaires;
+    }
+
+    public void horaireToString(){
+        for(Horaire horaire : horaires){
+            System.out.println("Premier Horaire : " + horaire.getJour());
+        }
     }
 
     public void addHoraire(Horaire horaire) {

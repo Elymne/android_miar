@@ -16,17 +16,17 @@ import nantes.iut.org.android_miar.entities.Piscine;
 public class MainActivity extends AppCompatActivity {
 
     List<Piscine> listePiscines = new ArrayList<>();
-    ArrayAdapter<Piscine> arrayAdapterPicine;
-    ListView listeViewPicine;
+    ArrayAdapter<Piscine> arrayAdapterPiscine;
+    ListView listeViewPiscine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listeViewPicine = (ListView) findViewById(R.id.listViewPicine);
-        arrayAdapterPicine = new PiscineArrayAdapter(this, R.layout.item_piscine, listePiscines);
+        listeViewPiscine = (ListView) findViewById(R.id.listViewPicine);
+        arrayAdapterPiscine = new PiscineArrayAdapter(this, R.layout.item_piscine, listePiscines);
 
-        listeViewPicine.setAdapter(arrayAdapterPicine);
+        listeViewPiscine.setAdapter(arrayAdapterPiscine);
     }
 
     @Override
@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void populate(ArrayList<Piscine> listePiscines){
-        this.arrayAdapterPicine.clear();
-        this.arrayAdapterPicine.addAll(listePiscines);
-        this.arrayAdapterPicine.notifyDataSetChanged();
+        this.arrayAdapterPiscine.clear();
+        this.arrayAdapterPiscine.addAll(listePiscines);
+        this.arrayAdapterPiscine.notifyDataSetChanged();
     }
 }
