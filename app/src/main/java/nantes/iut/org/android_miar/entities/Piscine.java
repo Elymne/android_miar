@@ -2,6 +2,9 @@ package nantes.iut.org.android_miar.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Piscine implements Parcelable {
@@ -58,6 +61,33 @@ public class Piscine implements Parcelable {
         this.pataugeoire = pataugeoire;
         this.accessibilite_handicap = accessibilite_handicap;
         this.cp = cp;
+    }
+
+    public List<Horaire> getHoraireOfTheDay() {
+        Calendar localDate = Calendar.getInstance();
+        List<Horaire> result = null;
+        if(this.horaires != null){
+            result = new ArrayList<>();
+            for (Horaire unHoraire : this.horaires) {
+                if (unHoraire.getJourInt() == localDate.getFirstDayOfWeek())
+                    result.add(unHoraire);
+            }
+        }
+        return result;
+    }
+
+    public boolean isOpen() {
+        Calendar localDate = Calendar.getInstance();
+        boolean result = false;
+        if(this.horaires != null){
+            for (Horaire unHoraire : this.horaires) {
+                for (Horaire unHoraireFrom : getHoraireOfTheDay()) {
+                    if(localDate.after(unHoraire.getHeure_debut()) && localDate.before(unHoraire.getHeure_fin()))
+                        result = true;
+                }
+            }
+        }
+        return result;
     }
 
     public String getRecordid() {

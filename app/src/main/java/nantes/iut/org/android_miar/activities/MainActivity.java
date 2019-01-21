@@ -12,8 +12,11 @@ import nantes.iut.org.android_miar.R;
 import nantes.iut.org.android_miar.adapters.PiscineArrayAdapter;
 import nantes.iut.org.android_miar.download.DownloadPiscine;
 import nantes.iut.org.android_miar.entities.Piscine;
+import nantes.iut.org.android_miar.listeners.ListViewListener;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final int ACCES_DETAIL_RESQUEST_CODE = 200;
 
     List<Piscine> listePiscines = new ArrayList<>();
     ArrayAdapter<Piscine> arrayAdapterPiscine;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapterPiscine = new PiscineArrayAdapter(this, R.layout.item_piscine, listePiscines);
 
         listeViewPiscine.setAdapter(arrayAdapterPiscine);
+        //Petit changement ici
+        listeViewPiscine.setOnItemClickListener(new ListViewListener(ACCES_DETAIL_RESQUEST_CODE, this));
     }
 
     @Override
