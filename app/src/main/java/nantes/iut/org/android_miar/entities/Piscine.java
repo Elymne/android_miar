@@ -1,12 +1,20 @@
 package nantes.iut.org.android_miar.entities;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 
-public class Piscine {
+public class Piscine implements Parcelable {
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Piscine createFromParcel(Parcel in) {
+            return new Piscine(in);
+        }
+
+        public Piscine[] newArray(int size) {
+            return new Piscine[size];
+        }
+    };
 
     private String recordid;
     private String bassin_loisir;
@@ -50,33 +58,6 @@ public class Piscine {
         this.pataugeoire = pataugeoire;
         this.accessibilite_handicap = accessibilite_handicap;
         this.cp = cp;
-    }
-
-    public List<Horaire> getHoraireOfTheDay() {
-        Calendar localDate = Calendar.getInstance();
-        List<Horaire> result = null;
-        if(this.horaires != null){
-            result = new ArrayList<>();
-            for (Horaire unHoraire : this.horaires) {
-                if (unHoraire.getJourInt() == localDate.getFirstDayOfWeek())
-                    result.add(unHoraire);
-            }
-        }
-        return result;
-    }
-
-    public boolean isOpen() {
-        Calendar localDate = Calendar.getInstance();
-        boolean result = false;
-        if(this.horaires != null){
-            for (Horaire unHoraire : this.horaires) {
-                for (Horaire unHoraireFrom : getHoraireOfTheDay()) {
-                    if(localDate.after(unHoraire.getHeure_debut()) && localDate.before(unHoraire.getHeure_fin()))
-                        result = true;
-                }
-            }
-        }
-        return result;
     }
 
     public String getRecordid() {
@@ -179,13 +160,38 @@ public class Piscine {
         return horaires;
     }
 
-    public void horaireToString(){
-        for(Horaire horaire : horaires){
-            System.out.println("Premier Horaire : " + horaire.getJour());
-        }
+    public void addHoraire(Horaire horaire){
+        this.horaires.add(horaire);
     }
 
-    public void addHoraire(Horaire horaire) {
-        this.horaires.add(horaire);
+    // Parcelling part
+    public Piscine(Parcel in){
+        this.recordid = in.readString();
+        this.bassin_loisir = in.readString();
+        this.commune = in.readString();
+        this.tel = in.readString();
+        this.info_complementaires = in.readString();
+        this.nom_usuel = in.readString();
+        this.nom_complet = in.readString();
+        this.libre_service = in.readString();
+        this.adresse = in.readString();
+        this.solarium = in.readString();
+        this.bassin_sportif = in.readString();
+        this.web = in.readString();
+        this.plongeoir = in.readString();
+        this.toboggan = in.readString();
+        this.pataugeoire = in.readString();
+        this.accessibilite_handicap = in.readString();
+        this.cp = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
