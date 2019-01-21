@@ -114,6 +114,8 @@ public class Piscine implements Parcelable {
         return nom_usuel;
     }
 
+    public String getNom_complet() {return nom_complet;}
+
     public boolean isLibre_service() {
         return libre_service == "OUI";
     }
@@ -222,6 +224,22 @@ public class Piscine implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(this.recordid);
+        dest.writeString(this.bassin_loisir );
+        dest.writeString(this.commune);
+        dest.writeString(this.tel);
+        dest.writeString(this.info_complementaires);
+        dest.writeString(this.nom_usuel);
+        dest.writeString(this.nom_complet);
+        dest.writeString(this.libre_service);
+        dest.writeString(this.adresse);
+        dest.writeString(this.solarium);
+        dest.writeString(this.bassin_sportif);
+        dest.writeString(this.web);
+        dest.writeString(this.plongeoir);
+        dest.writeString(this.toboggan);
+        dest.writeString(this.pataugeoire);
+        dest.writeString(this.accessibilite_handicap);
+        dest.writeString(this.cp);
     }
 }

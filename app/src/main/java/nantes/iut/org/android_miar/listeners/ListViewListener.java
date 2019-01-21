@@ -10,7 +10,7 @@ import nantes.iut.org.android_miar.entities.Piscine;
 
 public class ListViewListener implements AdapterView.OnItemClickListener {
 
-    private int ACCES_DETAIL_RESQUEST_CODE = 200;
+    private int ACCES_DETAIL_RESQUEST_CODE;
     private MainActivity mainActivity;
 
     public ListViewListener(int ACCES_DETAIL_RESQUEST_CODE, MainActivity mainActivity){
