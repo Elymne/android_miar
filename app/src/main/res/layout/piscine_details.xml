@@ -63,10 +63,11 @@
 
             <TextView
                 android:id="@+id/textViewBassinSportif"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
@@ -86,10 +87,11 @@
 
             <TextView
                 android:id="@+id/textViewToboggan"
-                android:layout_width="wrap_content"
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
@@ -109,10 +111,11 @@
 
             <TextView
                 android:id="@+id/textViewAccesHadicap"
-                android:layout_width="wrap_content"
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
@@ -132,10 +135,11 @@
 
             <TextView
                 android:id="@+id/textViewBassinLoisir"
-                android:layout_width="wrap_content"
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textAlignment="center" />
         </LinearLayout>
 
     </LinearLayout>
@@ -168,6 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:checked="false"
         android:textOff="Non"
         android:textOn="Oui"
         app:layout_constraintEnd_toEndOf="parent"
