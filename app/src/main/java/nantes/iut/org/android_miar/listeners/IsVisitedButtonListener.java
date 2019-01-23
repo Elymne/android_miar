@@ -5,16 +5,19 @@ import android.view.View;
 import android.widget.ToggleButton;
 
 import nantes.iut.org.android_miar.activities.PiscineDetailsActivity;
+import nantes.iut.org.android_miar.entities.Piscine;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class IsVisitedButtonListener implements View.OnClickListener {
     private ToggleButton isVisited;
     private PiscineDetailsActivity piscineDetailsActivity;
+    private Piscine piscine;
 
-    public IsVisitedButtonListener(ToggleButton isVisited, PiscineDetailsActivity piscineDetailsActivity) {
+    public IsVisitedButtonListener(ToggleButton isVisited, PiscineDetailsActivity piscineDetailsActivity, Piscine piscine) {
         this.isVisited = isVisited;
         this.piscineDetailsActivity = piscineDetailsActivity;
+        this.piscine = piscine;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class IsVisitedButtonListener implements View.OnClickListener {
         boolean checked = isVisited.isChecked();
         SharedPreferences pref = piscineDetailsActivity.getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("tgpref", checked); // value to store
+        editor.putBoolean(piscine.getRecordid() + "tgpref", checked); // value to store
         editor.commit();
     }
 }
