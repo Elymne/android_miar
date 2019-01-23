@@ -2,13 +2,10 @@ package nantes.iut.org.android_miar.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import java.util.List;
 
