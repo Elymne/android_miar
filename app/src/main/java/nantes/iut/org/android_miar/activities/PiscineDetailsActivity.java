@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import nantes.iut.org.android_miar.R;
 import nantes.iut.org.android_miar.entities.Piscine;
 import nantes.iut.org.android_miar.listeners.IsVisitedButtonListener;
+import nantes.iut.org.android_miar.listeners.RatingBarListener;
 
 public class PiscineDetailsActivity extends AppCompatActivity {
 
@@ -44,5 +46,9 @@ public class PiscineDetailsActivity extends AppCompatActivity {
         isVisited_btn.setOnClickListener(new IsVisitedButtonListener(isVisited_btn, this));
 
         // set listener on stars evaluation
+        RatingBar stars = (RatingBar) findViewById(R.id.ratingBar);
+        float note = preferences.getFloat("stars_note", 0);
+        stars.setRating(note);
+        stars.setOnRatingBarChangeListener(new RatingBarListener(this));
     }
 }
