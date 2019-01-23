@@ -12,6 +12,7 @@ import java.util.List;
 
 import nantes.iut.org.android_miar.R;
 import nantes.iut.org.android_miar.activities.MainActivity;
+import nantes.iut.org.android_miar.activities.PiscineDetailsActivity;
 import nantes.iut.org.android_miar.entities.Piscine;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -48,9 +49,10 @@ public class PiscineArrayAdapter extends ArrayAdapter<Piscine> {
         textAccesHandicap.setText(getItem(position).getAccessibilite_handicap());
 
         SharedPreferences preferences = ((Activity) context).getPreferences(MODE_PRIVATE);
-        String visite = "NON";
-        if (preferences.getBoolean(getItem(position).getRecordid() + "tgpref", true) == true) {
-            visite = "OUI";
+        String visite = "pas visité";
+        boolean isVisited = preferences.getBoolean(getItem(position).getRecordid() + "tgpref", false);
+        if ( isVisited ) {
+            visite = "visité";
         }
         textViewVisited.setText(visite);
 

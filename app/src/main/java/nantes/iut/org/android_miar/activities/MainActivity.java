@@ -16,7 +16,7 @@ import nantes.iut.org.android_miar.listeners.ListViewListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int ACCES_DETAIL_RESQUEST_CODE = 200;
+    private final int ACCES_DETAIL_REQUEST_CODE = 200;
 
     List<Piscine> listePiscines = new ArrayList<>();
     ArrayAdapter<Piscine> arrayAdapterPiscine;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         listeViewPiscine.setAdapter(arrayAdapterPiscine);
         //Petit changement ici
-        listeViewPiscine.setOnItemClickListener(new ListViewListener(ACCES_DETAIL_RESQUEST_CODE, this));
+        listeViewPiscine.setOnItemClickListener(new ListViewListener(ACCES_DETAIL_REQUEST_CODE, this));
     }
 
     @Override
