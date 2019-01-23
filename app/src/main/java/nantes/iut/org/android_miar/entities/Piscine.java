@@ -2,7 +2,6 @@ package nantes.iut.org.android_miar.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -19,7 +18,7 @@ public class Piscine implements Parcelable {
         }
     };
 
-    private String recordid;
+    private String idobj;
     private String bassin_loisir;
     private String commune;
     private String tel;
@@ -36,15 +35,15 @@ public class Piscine implements Parcelable {
     private String pataugeoire;
     private String accessibilite_handicap;
     private String cp;
-    private List<Horaire> horaires;
+    private List<Horaire> horaires = new ArrayList<>();
 
-    public Piscine(String recordid, String bassin_loisir, String commune,
+    public Piscine(String idobj, String bassin_loisir, String commune,
                    String tel, String info_complementaires, String nom_usuel, String nom_complet,
                    String libre_service, String adresse, String solarium,
                    String bassin_sportif, String web, String plongeoir,
                    String toboggan, String pataugeoire, String accessibilite_handicap,
                    String cp) {
-        this.recordid = recordid;
+        this.idobj = idobj;
         this.bassin_loisir = bassin_loisir;
         this.commune = commune;
         this.tel = tel;
@@ -63,35 +62,8 @@ public class Piscine implements Parcelable {
         this.cp = cp;
     }
 
-    public List<Horaire> getHoraireOfTheDay() {
-        Calendar localDate = Calendar.getInstance();
-        List<Horaire> result = null;
-        if(this.horaires != null){
-            result = new ArrayList<>();
-            for (Horaire unHoraire : this.horaires) {
-                if (unHoraire.getJourInt() == localDate.getFirstDayOfWeek())
-                    result.add(unHoraire);
-            }
-        }
-        return result;
-    }
-
-    public boolean isOpen() {
-        Calendar localDate = Calendar.getInstance();
-        boolean result = false;
-        if(this.horaires != null){
-            for (Horaire unHoraire : this.horaires) {
-                for (Horaire unHoraireFrom : getHoraireOfTheDay()) {
-                    if(localDate.after(unHoraire.getHeure_debut()) && localDate.before(unHoraire.getHeure_fin()))
-                        result = true;
-                }
-            }
-        }
-        return result;
-    }
-
-    public String getRecordid() {
-        return recordid;
+    public String getIdobj() {
+        return idobj;
     }
 
     public boolean isBassin_loisir() {
@@ -194,9 +166,32 @@ public class Piscine implements Parcelable {
         this.horaires.add(horaire);
     }
 
+    @Override
+    public String toString() {
+        return "Piscine{" +
+                "idobj='" + idobj + '\'' +
+                ", bassin_loisir='" + bassin_loisir + '\'' +
+                ", commune='" + commune + '\'' +
+                ", tel='" + tel + '\'' +
+                ", info_complementaires='" + info_complementaires + '\'' +
+                ", nom_usuel='" + nom_usuel + '\'' +
+                ", nom_complet='" + nom_complet + '\'' +
+                ", libre_service='" + libre_service + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", solarium='" + solarium + '\'' +
+                ", bassin_sportif='" + bassin_sportif + '\'' +
+                ", web='" + web + '\'' +
+                ", plongeoir='" + plongeoir + '\'' +
+                ", toboggan='" + toboggan + '\'' +
+                ", pataugeoire='" + pataugeoire + '\'' +
+                ", accessibilite_handicap='" + accessibilite_handicap + '\'' +
+                ", cp='" + cp + '\'' +
+                '}';
+    }
+
     // Parcelling part
     public Piscine(Parcel in){
-        this.recordid = in.readString();
+        this.idobj = in.readString();
         this.bassin_loisir = in.readString();
         this.commune = in.readString();
         this.tel = in.readString();
@@ -223,5 +218,29 @@ public class Piscine implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
+    }
+
+    public List<Horaire> getHoraireOfTheDay() {
+        Calendar localDate = Calendar.getInstance();
+        List<Horaire> result = new ArrayList<>();
+        if(!this.horaires.isEmpty()){
+            for (Horaire unHoraire : this.horaires) {
+                if(unHoraire.getJourInt() == localDate.get(Calendar.DAY_OF_WEEK))
+                    result.add(unHoraire);
+            }
+        }
+        return result;
+    }
+
+    public boolean isOpen() {
+        Calendar localDate = Calendar.getInstance();
+        boolean result = false;
+        if(!this.getHoraireOfTheDay().isEmpty()){
+            for (Horaire unHoraire : getHoraireOfTheDay()) {
+                if(localDate.after(unHoraire.getHeure_debut()) && localDate.before(unHoraire.getHeure_fin()))
+                    result = true;
+            }
+        }
+        return result;
     }
 }

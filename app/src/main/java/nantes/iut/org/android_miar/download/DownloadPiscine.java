@@ -50,7 +50,7 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
 
         for(Piscine unePiscine : piscineList){
             for(Horaire unHoraire : horaireList){
-                if(unePiscine.getRecordid()==(unHoraire.getRecordid()))
+                if(unePiscine.getIdobj().equals(unHoraire.getIdobj()))
                     unePiscine.addHoraire(unHoraire);
             }
         }

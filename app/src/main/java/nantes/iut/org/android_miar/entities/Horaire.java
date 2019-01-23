@@ -4,15 +4,15 @@ import java.util.Calendar;
 
 public class Horaire {
 
-    private String recordid;
+    private String idobj;
     private String jour;
     private Calendar heure_debut;
     private Calendar heure_fin;
     private Calendar date_debut;
     private Calendar date_fin;
 
-    public Horaire(String recordid, String jour, String heure_debut, String heure_fin, String date_debut, String date_fin){
-        this.recordid = recordid;
+    public Horaire(String idobj, String jour, String heure_debut, String heure_fin, String date_debut, String date_fin){
+        this.idobj = idobj;
         this.jour = jour;
         this.heure_debut = Calendar.getInstance();
         this.heure_debut.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE, parseHour(heure_debut), parseMinute(heure_debut));
@@ -24,8 +24,8 @@ public class Horaire {
         this.date_fin.set(parseYear(date_fin), parseMonth(date_fin), parseDay(date_fin));
     }
 
-    public String getRecordid() {
-        return recordid;
+    public String getIdobj() {
+        return idobj;
     }
 
     public String getJour() {

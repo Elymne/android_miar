@@ -38,15 +38,12 @@ public class PiscineArrayAdapter extends ArrayAdapter<Piscine> {
         TextView textBassinSportif = view.findViewById(R.id.textViewBassinSportif);
         TextView textBassinLoisir = view.findViewById(R.id.textViewBassinLoisir);
         TextView textAccesHandicap = view.findViewById(R.id.textViewAccesHadicap);
-        TextView textIsOpen = view.findViewById(R.id.textViewOpen);
 
         textNom.setText(getItem(position).getNom_usuel());
         textAdresse.setText(getItem(position).getAdresse());
         textBassinLoisir.setText(getItem(position).getBassin_loisir());
         textBassinSportif.setText(getItem(position).getBassin_sportif());
         textAccesHandicap.setText(getItem(position).getAccessibilite_handicap());
-        textIsOpen.setText(boolean_toStringOpen(getItem(position).isOpen()));
-
         return view;
     }
 
