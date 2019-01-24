@@ -10,20 +10,21 @@ import nantes.iut.org.android_miar.entities.Piscine;
 import static android.content.Context.MODE_PRIVATE;
 
 public class RatingBarListener implements RatingBar.OnRatingBarChangeListener {
+
     private PiscineDetailsActivity piscineDetailsActivity;
     private Piscine piscine;
+    private SharedPreferences.Editor editor;
 
-    public RatingBarListener(PiscineDetailsActivity piscineDetailsActivity, Piscine piscine) {
+    public RatingBarListener(PiscineDetailsActivity piscineDetailsActivity, Piscine piscine, SharedPreferences.Editor editor) {
         this.piscineDetailsActivity = piscineDetailsActivity;
         this.piscine = piscine;
+        this.editor = editor;
     }
 
     @Override
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
         float note = ratingBar.getRating();
-        SharedPreferences pref = piscineDetailsActivity.getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putFloat(piscine.getRecordid() + "stars_note", note); // value to store
-        editor.commit();
+        this.editor.putFloat(piscine.getIdobj() + "stars_note", note); // value to store
+        this.editor.commit();
     }
 }

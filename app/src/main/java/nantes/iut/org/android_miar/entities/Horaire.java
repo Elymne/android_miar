@@ -17,7 +17,7 @@ public class Horaire {
         this.heure_debut = Calendar.getInstance();
         this.heure_debut.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE, parseHour(heure_debut), parseMinute(heure_debut));
         this.heure_fin = Calendar.getInstance();
-        this.heure_fin.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE, parseHour(heure_debut), parseMinute(heure_debut));
+        this.heure_fin.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE, parseHour(heure_fin), parseMinute(heure_fin));
         this.date_debut = Calendar.getInstance();
         this.date_debut.set(parseYear(date_debut), parseMonth(date_debut), parseDay(date_debut));
         this.date_fin = Calendar.getInstance();
@@ -64,7 +64,7 @@ public class Horaire {
         String timeParse[] = stringDate.split("-");
         Integer result = 0;
         if(stringDate != "PAS DE DONNEES")
-            result = Integer.valueOf(timeParse[0]);
+            result = Integer.valueOf(timeParse[1]);
 
         return result;
     }
@@ -73,7 +73,7 @@ public class Horaire {
         String timeParse[] = stringDate.split("-");
         Integer result = 0;
         if(stringDate != "PAS DE DONNEES")
-            result = Integer.valueOf(timeParse[0]);
+            result = Integer.valueOf(timeParse[2]);
 
         return result;
     }
@@ -91,7 +91,7 @@ public class Horaire {
         String timeParse[] = stringDate.split(":");
         Integer result = 0;
         if(stringDate != "PAS DE DONNEES")
-            result = Integer.valueOf(timeParse[0]);
+            result = Integer.valueOf(timeParse[1]);
 
         return result;
     }

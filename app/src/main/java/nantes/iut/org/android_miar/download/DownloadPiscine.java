@@ -24,7 +24,6 @@ import nantes.iut.org.android_miar.entities.Piscine;
 public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>> {
 
     private static String BASE_URL_PISCINE = "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_piscines-nantes-metropole&facet=commune&facet=acces_pmr_equipt&facet=bassin_sportif&facet=pataugeoire&facet=toboggan&facet=bassin_apprentissage&facet=plongeoir&facet=solarium&facet=bassin_loisir&facet=accessibilite_handicap&facet=libre_service";
-    private static String BASE_URL_HORAIRE = "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_piscines-nantes-metropole-horaires&rows=200&facet=nom_periode&facet=jour&facet=type_horaire";
     private HttpURLConnection httpClient;
     private ProgressDialog progress;
     private volatile MainActivity mainActivity;
@@ -46,14 +45,6 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
     protected ArrayList<Piscine> doInBackground(String... values) {
 
         ArrayList<Piscine> piscineList = this.getPiscineList();
-        ArrayList<Horaire> horaireList = this.getHoraireList();
-
-        for(Piscine unePiscine : piscineList){
-            for(Horaire unHoraire : horaireList){
-                if(unePiscine.getIdobj().equals(unHoraire.getIdobj()))
-                    unePiscine.addHoraire(unHoraire);
-            }
-        }
 
         return piscineList;
     }
@@ -107,49 +98,6 @@ public class DownloadPiscine extends AsyncTask<String, Void, ArrayList<Piscine>>
         }
         return result;
     }
-
-    private ArrayList<Horaire> getHoraireList(){
-
-        ArrayList<Horaire> result = new ArrayList<>();
-        String stream = null;
-
-        try {
-            URL url = new URL(BASE_URL_HORAIRE);
-            this.httpClient = (HttpURLConnection) url.openConnection();
-            this.httpClient.setRequestMethod("GET");
-            InputStream inputStream = new BufferedInputStream(this.httpClient.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while((line = bufferedReader.readLine()) != null)
-                stringBuilder.append((line));
-            stream = stringBuilder.toString();
-
-            JSONArray jsonArrayRecords = new JSONObject(stream).getJSONArray("records");
-            for(int i = 0; i < jsonArrayRecords.length(); i++){
-                JSONObject jsonObjectRecords = jsonArrayRecords.getJSONObject(i);
-                result.add(new Horaire(
-                        hasValue("idobj", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("jour", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("heure_debut", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("heure_fin", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("date_debut", jsonObjectRecords.getJSONObject("fields")),
-                        hasValue("date_fin", jsonObjectRecords.getJSONObject("fields"))
-                ));
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } finally {
-            this.httpClient.disconnect();
-        }
-        return result;
-    }
-
-
 
     private String hasValue(String jsonValue, JSONObject jsonObject) throws JSONException {
         String result = "PAS DE DONNEES";

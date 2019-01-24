@@ -35,7 +35,6 @@ public class Piscine implements Parcelable {
     private String pataugeoire;
     private String accessibilite_handicap;
     private String cp;
-    private List<Horaire> horaires = new ArrayList<>();
 
     public Piscine(String idobj, String bassin_loisir, String commune,
                    String tel, String info_complementaires, String nom_usuel, String nom_complet,
@@ -66,10 +65,6 @@ public class Piscine implements Parcelable {
         return idobj;
     }
 
-    public boolean isBassin_loisir() {
-        return bassin_loisir == "OUI";
-    }
-
     public String getCommune() {
         return commune;
     }
@@ -89,7 +84,10 @@ public class Piscine implements Parcelable {
     public String getNom_complet() {return nom_complet;}
 
     public boolean isLibre_service() {
-        return libre_service == "OUI";
+        boolean result = false;
+        if(this.libre_service.equals("OUI"))
+            result = true;
+        return result;
     }
 
     public String getAdresse() {
@@ -97,11 +95,17 @@ public class Piscine implements Parcelable {
     }
 
     public boolean isSolarium() {
-        return solarium == "OUI";
+        boolean result = false;
+        if(this.solarium.equals("OUI"))
+            result = true;
+        return result;
     }
 
     public boolean isBassin_sportif() {
-        return bassin_sportif == "OUI";
+        boolean result = false;
+        if(this.bassin_sportif.equals("OUI"))
+            result = true;
+        return result;
     }
 
     public String getWeb() {
@@ -109,19 +113,38 @@ public class Piscine implements Parcelable {
     }
 
     public boolean isPlongeoir() {
-        return plongeoir == "OUI";
+        boolean result = false;
+        if(this.plongeoir.equals("OUI"))
+            result = true;
+        return result;
     }
 
     public boolean isToboggan() {
-        return toboggan == "OUI";
+        boolean result = false;
+        if(this.toboggan.equals("OUI"))
+            result = true;
+        return result;
     }
 
     public boolean isPataugeoire() {
-        return pataugeoire == "OUI";
+        boolean result = false;
+        if(this.pataugeoire.equals("OUI"))
+            result = true;
+        return result;
     }
 
-    public boolean isAccessibilite_handicap() {
-        return accessibilite_handicap == "OUI";
+    public boolean isAccessibilite_handicap(){
+        boolean result = false;
+        if(this.accessibilite_handicap.equals("OUI"))
+            result = true;
+        return result;
+    }
+
+    public boolean isBassin_loisir() {
+        boolean result = false;
+        if(this.bassin_loisir.equals("OUI"))
+            result = true;
+        return result;
     }
 
     public String getCp() {
@@ -158,14 +181,6 @@ public class Piscine implements Parcelable {
 
     public String getAccessibilite_handicap() {
         return accessibilite_handicap;
-    }
-
-    public List<Horaire> getHoraires() {
-        return horaires;
-    }
-
-    public void addHoraire(Horaire horaire){
-        this.horaires.add(horaire);
     }
 
     @Override
@@ -219,7 +234,7 @@ public class Piscine implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.recordid);
+        dest.writeString(this.idobj);
         dest.writeString(this.bassin_loisir );
         dest.writeString(this.commune);
         dest.writeString(this.tel);
@@ -236,29 +251,5 @@ public class Piscine implements Parcelable {
         dest.writeString(this.pataugeoire);
         dest.writeString(this.accessibilite_handicap);
         dest.writeString(this.cp);
-    }
-
-    public List<Horaire> getHoraireOfTheDay() {
-        Calendar localDate = Calendar.getInstance();
-        List<Horaire> result = new ArrayList<>();
-        if(!this.horaires.isEmpty()){
-            for (Horaire unHoraire : this.horaires) {
-                if(unHoraire.getJourInt() == localDate.get(Calendar.DAY_OF_WEEK))
-                    result.add(unHoraire);
-            }
-        }
-        return result;
-    }
-
-    public boolean isOpen() {
-        Calendar localDate = Calendar.getInstance();
-        boolean result = false;
-        if(!this.getHoraireOfTheDay().isEmpty()){
-            for (Horaire unHoraire : getHoraireOfTheDay()) {
-                if(localDate.after(unHoraire.getHeure_debut()) && localDate.before(unHoraire.getHeure_fin()))
-                    result = true;
-            }
-        }
-        return result;
     }
 }
