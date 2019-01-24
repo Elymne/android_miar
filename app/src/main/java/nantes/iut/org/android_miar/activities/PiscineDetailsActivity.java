@@ -39,16 +39,19 @@ public class PiscineDetailsActivity extends AppCompatActivity {
 
 
         ToggleButton isVisited_btn = (ToggleButton) findViewById(R.id.isVisited_btn);
+        RatingBar stars = (RatingBar) findViewById(R.id.ratingBar);
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        boolean tgpref = preferences.getBoolean("tgpref", false);  //default is true
+
+
+        boolean tgpref = preferences.getBoolean(piscine.getRecordid() + "tgpref", false);  //default is true
         isVisited_btn.setChecked(tgpref);
+        float note = preferences.getFloat(piscine.getRecordid() + "stars_note", 0);
+        stars.setRating(note);
+
         // set listener on "visited" button
-        isVisited_btn.setOnClickListener(new IsVisitedButtonListener(isVisited_btn, this));
+        isVisited_btn.setOnClickListener(new IsVisitedButtonListener(isVisited_btn, this, piscine));
 
         // set listener on stars evaluation
-        RatingBar stars = (RatingBar) findViewById(R.id.ratingBar);
-        float note = preferences.getFloat("stars_note", 0);
-        stars.setRating(note);
-        stars.setOnRatingBarChangeListener(new RatingBarListener(this));
+        stars.setOnRatingBarChangeListener(new RatingBarListener(this, piscine));
     }
 }
